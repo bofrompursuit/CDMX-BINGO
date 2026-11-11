@@ -1,7 +1,7 @@
 {
-  "name": "NYC Bingo",
-  "short_name": "NYC Bingo",
-  "description": "New York City themed photo bingo game.",
+  "name": "CDMX Bingo",
+  "short_name": "CDMX Bingo",
+  "description": "Mexico City (CDMX) themed photo bingo game.",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#006BB6",
