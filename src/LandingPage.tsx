@@ -95,12 +95,13 @@ export default function LandingPage({ onEnter }: { onEnter: ()=>void }) {
       await saveLead(contact)
       onEnter()
     } catch (err) {
-      setLoading(false)
-      setSaveError(
-        err instanceof Error && err.message.includes('relation')
-          ? 'Database not set up yet — run the SQL setup in your Supabase dashboard.'
-          : "Couldn't save your info. Please try again."
-      )
+      // Don't lock players out when the leads DB is unreachable; keep the email locally instead
+      console.warn('saveLead failed, continuing without remote save:', err)
+      try {
+        const pending = JSON.parse(localStorage.getItem('pendingLeads') || '[]')
+        localStorage.setItem('pendingLeads', JSON.stringify([...pending, { contact: contact.trim(), at: Date.now() }]))
+      } catch { /* storage unavailable */ }
+      onEnter()
     }
   }
 

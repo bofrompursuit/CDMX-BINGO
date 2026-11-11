@@ -6,31 +6,31 @@ import { createPortal } from 'react-dom'
 // ─── Static data ─────────────────────────────────────────────────────────────
 
 const SQUARES = [
-  { id: 0,  emoji: '🥯', label: 'Bagel' },
-  { id: 1,  emoji: '🚇', label: 'Delayed subway train' },
-  { id: 2,  emoji: '🎷', label: 'Street performer' },
-  { id: 3,  emoji: '🐈', label: 'Bodega cat' },
-  { id: 4,  emoji: '🍕', label: 'Pizza slice' },
-  { id: 5,  emoji: '🎬', label: 'Movie filming set' },
-  { id: 6,  emoji: '🚕', label: 'Yellow cab' },
-  { id: 7,  emoji: '🐦', label: 'Pigeon' },
-  { id: 8,  emoji: '👜', label: 'Dog in a tote bag' },
-  { id: 9,  emoji: '☀️', label: 'Dodging a puddle on a sunny day' },
-  { id: 10, emoji: '🛒', label: "Trader Joe's line" },
-  { id: 11, emoji: '☕', label: 'Overpriced iced coffee' },
+  { id: 0, emoji: '🎤', label: 'Karol G' },
+  { id: 1, emoji: '🪆', label: 'Creepy Doll' },
+  { id: 2, emoji: '🤼', label: 'Lucha libre mask' },
+  { id: 3, emoji: '🌮', label: 'Tacos al pastor' },
+  { id: 4, emoji: '👼', label: 'Angel of Independence' },
+  { id: 5, emoji: '🛶', label: 'Xochimilco boat' },
+  { id: 6, emoji: '🔴', label: 'A red object' },
+  { id: 7, emoji: '🎺', label: 'Mariachi band' },
+  { id: 8, emoji: '🎏', label: 'Papel picado' },
+  { id: 9, emoji: '🇲🇽', label: 'The Mexican Flag' },
+  { id: 10, emoji: '💪', label: 'Photo with a Wrestler' },
+  { id: 11, emoji: '🚖', label: 'Pink & white taxi' },
   { id: 12, emoji: '📸', label: 'FREE', isFree: true, isCenter: true },
-  { id: 13, emoji: '🕶️', label: 'Celebrity spotted in the wild' },
-  { id: 14, emoji: '🗑️', label: 'Trash pile mountain' },
-  { id: 15, emoji: '🍹', label: 'Rooftop bar drinks' },
-  { id: 16, emoji: '🍦', label: 'Mister Softee truck music' },
-  { id: 17, emoji: '🐀', label: 'Rat running across the tracks' },
-  { id: 18, emoji: '🌳', label: 'Central Park' },
-  { id: 19, emoji: '🏗️', label: 'Scaffolding' },
-  { id: 20, emoji: '🥙', label: 'Halal cart' },
-  { id: 21, emoji: '🎤', label: 'Subway performance' },
-  { id: 22, emoji: '🖤', label: 'Someone wearing black' },
-  { id: 23, emoji: '💳', label: 'Subway swipe' },
-  { id: 24, emoji: '🌇', label: 'Skyline view at sunset' },
+  { id: 13, emoji: '🥖', label: 'Churros' },
+  { id: 14, emoji: '🫓', label: 'Tortillas' },
+  { id: 15, emoji: '🎟️', label: 'Concert wristband' },
+  { id: 16, emoji: '🟢', label: 'A green object' },
+  { id: 17, emoji: '🎨', label: 'Street art mural' },
+  { id: 18, emoji: '🌼', label: 'Marigolds' },
+  { id: 19, emoji: '🏛️', label: 'Palacio de Bellas Artes' },
+  { id: 20, emoji: '✈️', label: 'Plane window view' },
+  { id: 21, emoji: '🥃', label: 'Mezcal toast' },
+  { id: 22, emoji: '🌽', label: 'Elote' },
+  { id: 23, emoji: '⚪', label: 'A white object' },
+  { id: 24, emoji: '👯', label: 'Squad at JFK' },
 ]
 
 const BINGO_LINES = [
@@ -39,19 +39,9 @@ const BINGO_LINES = [
   [0,6,12,18,24],[4,8,12,16,20],
 ]
 
-const TILE_COLORS: [string, string][] = [
-  ['#F43F8A','#BE185D'],['#F97316','#C2410C'],['#EAB308','#B45309'],
-  ['#14B8A6','#0E7490'],['#A855F7','#7E22CE'],['#EC4899','#9333EA'],
-  ['#38BDF8','#2563EB'],['#34D399','#0D9488'],['#FB7185','#E11D48'],
-  ['#FBBF24','#D97706'],['#8B5CF6','#6D28D9'],['#22D3EE','#0284C7'],
-  ['#F472B6','#DB2777'],['#F87171','#DC2626'],['#4ADE80','#16A34A'],
-  ['#818CF8','#4F46E5'],['#FB923C','#EA580C'],['#2DD4BF','#0F766E'],
-  ['#E879F9','#C026D3'],['#60A5FA','#4338CA'],['#FCD34D','#D97706'],
-  ['#FC8181','#B91C1C'],['#C084FC','#7C3AED'],['#67E8F9','#0E7490'],
-  ['#F0ABFC','#9333EA'],
-]
+const TILE_COLORS: [string, string][] = [['#E0218A','#B0005A'],['#F4A300','#C47F00'],['#0A6B47','#064D33'],['#7B3FD1','#5A28A3'],['#00A3C4','#007A94'],['#F4A300','#C47F00'],['#0A6B47','#064D33'],['#7B3FD1','#5A28A3'],['#00A3C4','#007A94'],['#E0218A','#B0005A'],['#0A6B47','#064D33'],['#7B3FD1','#5A28A3'],['#00A3C4','#007A94'],['#E0218A','#B0005A'],['#F4A300','#C47F00'],['#7B3FD1','#5A28A3'],['#00A3C4','#007A94'],['#E0218A','#B0005A'],['#F4A300','#C47F00'],['#0A6B47','#064D33'],['#00A3C4','#007A94'],['#E0218A','#B0005A'],['#F4A300','#C47F00'],['#0A6B47','#064D33'],['#7B3FD1','#5A28A3']]
 
-const LETTER_COLORS = ['#FF2D78','#FF6B35','#FFD60A','#00D4AA','#8B5CF6']
+const LETTER_COLORS = ['#E0218A','#F4A300','#0A6B47','#7B3FD1','#00A3C4']
 const BURST_COLORS  = ['#FF2D78','#FFD60A','#00D4AA','#FF6B35','#8B5CF6','#06B6D4','#F472B6','#34D399','#FBBF24','#60A5FA']
 
 const AFFIRMATIONS = [
@@ -66,7 +56,7 @@ const AFFIRMATIONS = [
   { text: 'ICONIC BEHAVIOR!',     emoji: '🌈' },
   { text: 'MAIN CHARACTER!',      emoji: '🌟' },
   { text: 'WE LOVE TO SEE IT!',   emoji: '😍' },
-  { text: 'NYC ROYALTY!', emoji: '🗽' },
+  { text: '¡QUÉ CHINGÓN!', emoji: '🇲🇽' },
   { text: 'SLAYING ACCORDINGLY!', emoji: '🔱' },
 ]
 
@@ -163,9 +153,9 @@ async function exportHDCard(
 
   // Title
   ctx.textAlign = 'center'
-  ctx.fillStyle = '#F58426'
-  ctx.font = '72px Anton, sans-serif'
-  ctx.fillText('🗽 NYC BINGO 🗽', W / 2, 110)
+  ctx.fillStyle = '#E0218A'
+  ctx.font = '72px "Bowlby One", sans-serif'
+  ctx.fillText('🇲🇽 CDMX BINGO 🇲🇽', W / 2, 110)
   ctx.fillStyle = 'rgba(255,255,255,0.55)'
   ctx.font = '38px sans-serif'
   ctx.fillText(`${completedCount} / 24 challenges completed`, W / 2, 165)
@@ -226,19 +216,19 @@ async function exportHDCard(
 
   // Branding
   ctx.fillStyle = 'rgba(255,255,255,0.35)'; ctx.font = '30px sans-serif'; ctx.textAlign = 'center'
-  ctx.fillText('🗽 New York City Bingo — play at write-unify-73848034.figma.site 🚕', W/2, H - 55)
+  ctx.fillText('🇲🇽 CDMX Bingo · Nov 12–16 · Ciudad de México 🌮', W/2, H - 55)
 
   canvas.toBlob(blob => {
     if (!blob) return
     const url = URL.createObjectURL(blob)
-    const a = document.createElement('a'); a.href = url; a.download = 'new-york-city-bingo-hd.jpg'
+    const a = document.createElement('a'); a.href = url; a.download = 'cdmx-bingo-hd.jpg'
     document.body.appendChild(a); a.click(); document.body.removeChild(a); URL.revokeObjectURL(url)
   }, 'image/jpeg', 0.92)
 }
 
 // ─── IndexedDB ────────────────────────────────────────────────────────────────
 
-const IDB_NAME = 'new-york-city-bingo', IDB_VER = 1, PHOTO_STORE = 'photos'
+const IDB_NAME = 'cdmx-bingo', IDB_VER = 1, PHOTO_STORE = 'photos'
 
 function openPhotoDb(): Promise<IDBDatabase> {
   return new Promise((resolve, reject) => {
@@ -891,7 +881,7 @@ function LightboxModal({ square, photo, timestamp, onClose, onReplace, onDelete 
 function BingoModal({ lineCount, affirmation, onClose, onShare }: {
   lineCount:number; affirmation:{text:string;emoji:string}; onClose:()=>void; onShare:()=>void
 }) {
-  const body=lineCount>=12?'Full board — you are New York City royalty. Period.':lineCount>=3?'Three rows in? You literally ate the whole board!':lineCount===2?'Double bingo! Double the drama. We love to see it.':'The city that never sleeps bows before you 🗽'
+  const body=lineCount>=12?'Full board — you own Ciudad de México. ¡Felicidades!':lineCount>=3?'Three rows in? You literally ate the whole board!':lineCount===2?'Double bingo! Double the drama. We love to see it.':'¡Viva México! 🇲🇽'
   return createPortal(
     <div className="fixed inset-0 flex items-center justify-center" style={{ zIndex:9999 }}>
       <div className="absolute inset-0 bg-black/78 backdrop-blur-[6px]"/>
@@ -924,7 +914,7 @@ function BingoModal({ lineCount, affirmation, onClose, onShare }: {
             <button onClick={onClose}
               className="w-full py-3 rounded-2xl font-bold text-white/70 text-sm border active:scale-[0.97] transition-transform"
               style={{ background:'rgba(255,255,255,0.07)',borderColor:'rgba(255,255,255,0.14)' }}>
-              Keep Playing 🚕
+              Keep Playing 🌮
             </button>
           </div>
         </div>
@@ -941,10 +931,10 @@ function ShareDrawer({ photos, completedCount, isVIP, onClose, onExportHD }: {
   photos:Record<number,string>; completedCount:number; isVIP:boolean; onClose:()=>void; onExportHD:()=>void
 }) {
   const [copied,setCopied]=useState(false)
-  const shareText=`🗽 New York City Bingo! I completed ${completedCount}/24 challenges 🚕\nCan you beat my score?`
-  const subject='My New York City Bingo Card 🗽🚕'
+  const shareText=`🇲🇽 CDMX Bingo! I completed ${completedCount}/24 challenges 🌮\nCan you beat my score?`
+  const subject='My CDMX Bingo Card 🇲🇽🌮'
   const handleSMS=()=>{window.location.href=`sms:?body=${encodeURIComponent(shareText)}`}
-  const handleEmail=()=>{window.location.href=`mailto:?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(`Hey!\n\n${shareText}\n\nPlay along! 🗽`)}`}
+  const handleEmail=()=>{window.location.href=`mailto:?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(`Hey!\n\n${shareText}\n\nPlay along! 🇲🇽`)}`}
   const handleCopy=async()=>{
     try{await navigator.clipboard.writeText(shareText)}
     catch{const el=document.createElement('textarea');el.value=shareText;document.body.appendChild(el);el.select();document.execCommand('copy');document.body.removeChild(el)}
@@ -961,7 +951,7 @@ function ShareDrawer({ photos, completedCount, isVIP, onClose, onExportHD }: {
           <p className="text-pink-300/75 text-center text-xs mb-4 font-semibold">{completedCount} / 24 completed · screenshot to share visuals</p>
           {/* Mini card */}
           <div className="rounded-2xl overflow-hidden p-3 mb-5" style={{ background:'linear-gradient(135deg,#7C3AED,#DB2777,#EA580C)' }}>
-            <p className="text-white font-black text-center text-sm mb-2" style={{ fontFamily:'Pacifico,cursive',textShadow:'0 1px 6px rgba(0,0,0,0.4)' }}>🗽 New York City Bingo</p>
+            <p className="text-white font-black text-center text-sm mb-2" style={{ fontFamily:'Pacifico,cursive',textShadow:'0 1px 6px rgba(0,0,0,0.4)' }}>🇲🇽 CDMX Bingo</p>
             <div className="grid grid-cols-5 gap-[3px] mb-2">
               {SQUARES.map(sq=>{
                 const [c1,c2]=TILE_COLORS[sq.id]
@@ -1041,12 +1031,12 @@ function ShareLinkDrawer({ customLabels, onClose }: {
   }
 
   const shareViaSMS = () => {
-    const msg = `🗽 Join my custom New York City Bingo game! Tap to play on your own card:\n${link}`
+    const msg = `🇲🇽 Join my custom CDMX Bingo game! Tap to play on your own card:\n${link}`
     window.location.href = `sms:?body=${encodeURIComponent(msg)}`
   }
   const shareViaEmail = () => {
-    const subject = "You're invited — Custom New York City Bingo 🗽"
-    const body = `Hey!\n\nI made a custom New York City Bingo card — tap the link below to play on your own device:\n\n${link}\n\nLet's see who gets BINGO first 🗽`
+    const subject = "You're invited — Custom CDMX Bingo 🇲🇽"
+    const body = `Hey!\n\nI made a custom CDMX Bingo card — tap the link below to play on your own device:\n\n${link}\n\nLet's see who gets BINGO first 🇲🇽`
     window.location.href = `mailto:?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`
   }
 
@@ -1105,7 +1095,7 @@ function ShareLinkDrawer({ customLabels, onClose }: {
               {Array.from({length:MAX_PLAYERS},(_,i)=>(
                 <div key={i} className="w-8 h-8 rounded-full flex items-center justify-center text-sm"
                   style={{ background:'rgba(212,175,55,0.08)',border:'1.5px dashed rgba(212,175,55,0.25)' }}>
-                  {['🗽','🚕','🥯','🍕','🕶️','🐀','💅','👑'][i]}
+                  {['🇲🇽','🌮','🥯','🍕','🕶️','🐀','💅','👑'][i]}
                 </div>
               ))}
             </div>
@@ -1494,21 +1484,21 @@ export default function App() {
         <div className="w-full flex justify-center mb-1">
           <svg viewBox="0 0 200 64" style={{ width:'94%', maxWidth:440, height:'auto', overflow:'visible' }}>
             <defs>
-              <path id="nycTitleArc" d="M 8 50 Q 100 -4 192 50" fill="none"/>
+              <path id="cdmxTitleArc" d="M 8 50 Q 100 -4 192 50" fill="none"/>
             </defs>
             <text
               style={{
-                fontFamily: "'Passion One', cursive",
+                fontFamily: "'Bowlby One', sans-serif",
                 fontWeight: 900,
                 fontSize: 26,
-                fill: '#006BB6',
-                stroke: '#F58426',
+                fill: '#E0218A',
+                stroke: '#0A6B47',
                 strokeWidth: 2.5,
                 paintOrder: 'stroke',
                 letterSpacing: '1px',
               } as CSSProperties}
             >
-              <textPath href="#nycTitleArc" startOffset="50%" textAnchor="middle">NYC BINGO</textPath>
+              <textPath href="#cdmxTitleArc" startOffset="50%" textAnchor="middle">CDMX BINGO</textPath>
             </text>
           </svg>
         </div>
@@ -1753,13 +1743,13 @@ export default function App() {
           {toast==='welcome'&&(
             <div className="toast-in flex items-center gap-2 px-4 py-2.5 rounded-full font-bold text-sm text-white whitespace-nowrap"
               style={{ background:'linear-gradient(90deg,#7C3AED,#DB2777)',boxShadow:'0 4px 20px rgba(139,92,246,0.5)' }}>
-              <span>🗽</span><span>Progress restored! Pick up where you left off.</span><span>✨</span>
+              <span>🇲🇽</span><span>Progress restored! Pick up where you left off.</span><span>✨</span>
             </div>
           )}
           {toast==='reset'&&(
             <div className="toast-in flex items-center gap-2 px-4 py-2.5 rounded-full font-bold text-sm text-white whitespace-nowrap"
               style={{ background:'linear-gradient(90deg,#14B8A6,#0E7490)',boxShadow:'0 4px 20px rgba(20,184,166,0.5)' }}>
-              <span>🔄</span><span>Card reset. Fresh adventure awaits!</span><span>🚕</span>
+              <span>🔄</span><span>Card reset. Fresh adventure awaits!</span><span>🌮</span>
             </div>
           )}
           {toast==='vip'&&(
