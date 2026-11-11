@@ -16,7 +16,7 @@ const SQUARES = [
   { id: 7, emoji: '🎺', label: 'Mariachi band' },
   { id: 8, emoji: '🎏', label: 'Papel picado' },
   { id: 9, emoji: '🇲🇽', label: 'The Mexican Flag' },
-  { id: 10, emoji: '💪', label: 'Photo with a Wrestler' },
+  { id: 10, emoji: '🥐', label: 'Pan dulce' },
   { id: 11, emoji: '🚖', label: 'Pink & white taxi' },
   { id: 12, emoji: '📸', label: 'FREE', isFree: true, isCenter: true },
   { id: 13, emoji: '🥖', label: 'Churros' },
@@ -30,7 +30,7 @@ const SQUARES = [
   { id: 21, emoji: '🥃', label: 'Mezcal toast' },
   { id: 22, emoji: '🌽', label: 'Elote' },
   { id: 23, emoji: '⚪', label: 'A white object' },
-  { id: 24, emoji: '👯', label: 'Squad at JFK' },
+  { id: 24, emoji: '🛫', label: 'Airport moment' },
 ]
 
 const BINGO_LINES = [
