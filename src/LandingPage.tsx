@@ -93,6 +93,7 @@ export default function LandingPage({ onEnter }: { onEnter: ()=>void }) {
 
     try {
       await saveLead(contact)
+      if (document.activeElement instanceof HTMLElement) document.activeElement.blur()
       onEnter()
     } catch (err) {
       // Don't lock players out when the leads DB is unreachable; keep the email locally instead
@@ -101,6 +102,7 @@ export default function LandingPage({ onEnter }: { onEnter: ()=>void }) {
         const pending = JSON.parse(localStorage.getItem('pendingLeads') || '[]')
         localStorage.setItem('pendingLeads', JSON.stringify([...pending, { contact: contact.trim(), at: Date.now() }]))
       } catch { /* storage unavailable */ }
+      if (document.activeElement instanceof HTMLElement) document.activeElement.blur()
       onEnter()
     }
   }

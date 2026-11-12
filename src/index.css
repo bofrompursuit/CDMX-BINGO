@@ -3,6 +3,9 @@
 
 * { box-sizing: border-box; font-family: 'Nunito', sans-serif; }
 body { background: #0F0320; min-height: 100vh; overflow-x: hidden; }
+/* iOS Safari zooms into inputs under 16px and stays zoomed after login */
+input, select, textarea { font-size: max(16px, 1em) !important; }
+html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
 ::-webkit-scrollbar { display: none; }
 
 /* ── Shimmer title ── */
