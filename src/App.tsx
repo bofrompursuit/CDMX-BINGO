@@ -1271,6 +1271,7 @@ export default function App() {
   const [saveStatus,    setSaveStatus]    = useState<SaveStatus>('saved')
   const [toast,         setToast]         = useState<'welcome'|'reset'|'vip'|null>(null)
   const [resetKey,      setResetKey]      = useState(0)
+  const [confirmReset,  setConfirmReset]  = useState(false)
 
   useAmbientAudio(audioEnabled)
 
@@ -1705,13 +1706,33 @@ export default function App() {
             <span>{tr('Share My Bingo')}</span>
           </button>
         )}
-        <button onClick={handleReset}
-          className="w-full py-[11px] rounded-2xl font-bold text-sm border active:scale-[0.97] transition-transform"
-          style={isVIP
-            ? { background:'rgba(212,175,55,0.05)',borderColor:'rgba(212,175,55,0.15)',color:'rgba(212,175,55,0.4)' }
-            : { background:'rgba(255,255,255,0.05)',borderColor:'rgba(255,255,255,0.1)',color:'rgba(255,255,255,0.45)' }}>
-          🔄 Reset Card / Start New Adventure
-        </button>
+        {confirmReset ? (
+          <div className="w-full rounded-2xl border p-3 flex flex-col gap-2.5"
+            style={{ background:'rgba(255,255,255,0.06)',borderColor:'rgba(255,255,255,0.18)' }}>
+            <p className="text-white text-sm font-bold text-center">{tr('Reset your card?')}</p>
+            <p className="text-white/60 text-xs text-center">{tr('This clears every photo and checked square. It can\'t be undone.')}</p>
+            <div className="flex gap-2">
+              <button onClick={()=>setConfirmReset(false)} autoFocus
+                className="flex-1 py-[10px] rounded-xl font-bold text-sm border active:scale-[0.97] transition-transform"
+                style={{ background:'rgba(255,255,255,0.08)',borderColor:'rgba(255,255,255,0.2)',color:'white' }}>
+                {tr('Cancel')}
+              </button>
+              <button onClick={()=>{setConfirmReset(false);handleReset()}}
+                className="flex-1 py-[10px] rounded-xl font-bold text-sm active:scale-[0.97] transition-transform"
+                style={{ background:'#E0218A',color:'white' }}>
+                {tr('Yes, reset')}
+              </button>
+            </div>
+          </div>
+        ) : (
+          <button onClick={()=>setConfirmReset(true)}
+            className="w-full py-[11px] rounded-2xl font-bold text-sm border active:scale-[0.97] transition-transform"
+            style={isVIP
+              ? { background:'rgba(212,175,55,0.05)',borderColor:'rgba(212,175,55,0.15)',color:'rgba(212,175,55,0.4)' }
+              : { background:'rgba(255,255,255,0.05)',borderColor:'rgba(255,255,255,0.1)',color:'rgba(255,255,255,0.45)' }}>
+            🔄 {tr('Reset Card / Start New Adventure')}
+          </button>
+        )}
       </div>
 
       <p className="mt-4 text-[11px] text-center px-8 leading-relaxed"

@@ -67,6 +67,12 @@ const ES: Record<string, string> = {
   'Unlock VIP & Customize Your Board — $2.99': 'Desbloquea VIP y personaliza tu tablero — $2.99',
   'Saving…': 'Guardando…',
   'Saved to device': 'Guardado en el dispositivo',
+  'Reset Card / Start New Adventure': 'Reiniciar tablero / Nueva aventura',
+  'Reset your card?': '¿Reiniciar tu tablero?',
+  "This clears every photo and checked square. It can't be undone.":
+    'Esto borra todas las fotos y casillas marcadas. No se puede deshacer.',
+  'Cancel': 'Cancelar',
+  'Yes, reset': 'Sí, reiniciar',
 
   // Bingo / share
   'Full board — you own Ciudad de México. ¡Felicidades!': 'Tablero completo — la CDMX es tuya. ¡Felicidades!',
