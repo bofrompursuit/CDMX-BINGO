@@ -2,6 +2,7 @@ import {
   useState, useRef, useCallback, useEffect, type CSSProperties, type TouchEvent,
 } from 'react'
 import { createPortal } from 'react-dom'
+import { tr, useLang, LangToggle } from './i18n'
 
 // ─── Static data ─────────────────────────────────────────────────────────────
 
@@ -461,12 +462,12 @@ function SaveBadge({ status }: { status: SaveStatus }) {
     <span className="flex items-center gap-1 text-[10px] font-semibold transition-all duration-300"
       style={{ color:status==='saving'?'rgba(255,200,60,0.9)':'rgba(100,220,130,0.85)' }}>
       {status==='saving' ? (
-        <><span className="w-[7px] h-[7px] rounded-full border border-yellow-400/70 border-t-transparent animate-spin inline-block"/>Saving…</>
+        <><span className="w-[7px] h-[7px] rounded-full border border-yellow-400/70 border-t-transparent animate-spin inline-block"/>{tr('Saving…')}</>
       ) : (
         <><svg viewBox="0 0 10 10" width="9" height="9" fill="none">
           <circle cx="5" cy="5" r="4.5" fill="#22C55E" opacity="0.85"/>
           <path d="M2.8 5l1.4 1.4 3-3" stroke="white" strokeWidth="1.1" strokeLinecap="round" strokeLinejoin="round"/>
-        </svg>Saved to device</>
+        </svg>{tr('Saved to device')}</>
       )}
     </span>
   )
@@ -577,7 +578,7 @@ function VIPModal({ isVIP, onClose, onUpgrade, onToggleEdit, isEditing, onShareL
               <button onClick={()=>{onShareLink();onClose()}}
                 className="w-full py-3.5 rounded-2xl font-black text-[#06050F] text-base flex items-center justify-center gap-2 active:scale-[0.97] transition-transform"
                 style={{ background:'linear-gradient(90deg,#C9A84C,#FFE08A)',boxShadow:'0 4px 20px rgba(212,175,55,0.4)' }}>
-                <span>🔗</span><span>Generate Player Link</span>
+                <span>🔗</span><span>{tr('Generate Player Link')}</span>
               </button>
               <button onClick={()=>{onToggleEdit();onClose()}}
                 className="w-full py-3.5 rounded-2xl font-black text-base flex items-center justify-center gap-2 active:scale-[0.97] transition-transform"
@@ -784,7 +785,7 @@ function AffirmationBanner({ text, emoji, onDone }: { text:string; emoji:string;
           style={{ background:`linear-gradient(135deg,${c1},${c2})`,
                    boxShadow:`0 8px 40px ${c1}70,0 0 60px ${c2}40`,border:'1.5px solid rgba(255,255,255,0.25)' }}>
           <div className="text-3xl mb-1 text-center">{emoji}</div>
-          <div className="font-black text-white text-2xl text-center text-glow-pulse leading-tight">{text}</div>
+          <div className="font-black text-white text-2xl text-center text-glow-pulse leading-tight">{tr(text)}</div>
         </div>
       </div>
     </div>,
@@ -841,7 +842,7 @@ function LightboxModal({ square, photo, timestamp, onClose, onReplace, onDelete 
           style={{ background:`linear-gradient(90deg,${c1},${c2})`,boxShadow:`0 2px 14px ${c1}60` }}>
           <span className="text-base">{square.emoji}</span>
           <div>
-            <p className="text-white font-black text-xs leading-tight">{square.label}</p>
+            <p className="text-white font-black text-xs leading-tight">{tr(square.label)}</p>
             {timestamp&&<p className="text-white/70 text-[10px] leading-tight">Added {formatTime(timestamp)}</p>}
           </div>
         </div>
@@ -854,7 +855,7 @@ function LightboxModal({ square, photo, timestamp, onClose, onReplace, onDelete 
       <div className={`absolute bottom-0 inset-x-0 px-5 pb-10 pt-6 pointer-events-none transition-opacity duration-300 controls-up ${showControls?'opacity-100':'opacity-0'}`}
         style={{ background:'linear-gradient(to top,rgba(0,0,0,0.82),transparent)' }}>
         <p className="text-white/40 text-[10px] text-center mb-3 font-semibold">
-          {zoom>1?'Double-tap to reset · Drag to pan':'Pinch to zoom · Double-tap to expand · Tap outside to close'}
+          {zoom>1?tr('Double-tap to reset · Drag to pan'):tr('Pinch to zoom · Double-tap to expand · Tap outside to close')}
         </p>
         <div className="flex gap-3 pointer-events-auto">
           <button onClick={()=>{onDelete();onClose()}}
@@ -881,7 +882,7 @@ function LightboxModal({ square, photo, timestamp, onClose, onReplace, onDelete 
 function BingoModal({ lineCount, affirmation, onClose, onShare }: {
   lineCount:number; affirmation:{text:string;emoji:string}; onClose:()=>void; onShare:()=>void
 }) {
-  const body=lineCount>=12?'Full board — you own Ciudad de México. ¡Felicidades!':lineCount>=3?'Three rows in? You literally ate the whole board!':lineCount===2?'Double bingo! Double the drama. We love to see it.':'¡Viva México! 🇲🇽'
+  const body=lineCount>=12?tr('Full board — you own Ciudad de México. ¡Felicidades!'):lineCount>=3?tr('Three rows in? You literally ate the whole board!'):lineCount===2?tr('Double bingo! Double the drama. We love to see it.'):tr('¡Viva México! 🇲🇽')
   return createPortal(
     <div className="fixed inset-0 flex items-center justify-center" style={{ zIndex:9999 }}>
       <div className="absolute inset-0 bg-black/78 backdrop-blur-[6px]"/>
@@ -902,14 +903,14 @@ function BingoModal({ lineCount, affirmation, onClose, onShare }: {
           <div className="mb-3 px-4 py-2.5 rounded-xl"
             style={{ background:'linear-gradient(90deg,rgba(255,45,120,0.2),rgba(139,92,246,0.2))',border:'1px solid rgba(255,45,120,0.3)' }}>
             <span className="text-2xl">{affirmation.emoji}</span>
-            <p className="font-black text-white text-xl leading-tight text-glow-pulse">{affirmation.text}</p>
+            <p className="font-black text-white text-xl leading-tight text-glow-pulse">{tr(affirmation.text)}</p>
           </div>
           <p className="text-pink-300 font-semibold text-sm mb-5 leading-snug px-2">{body}</p>
           <div className="flex flex-col gap-2.5">
             <button onClick={onShare}
               className="w-full py-3.5 rounded-2xl font-black text-white text-base flex items-center justify-center gap-2 active:scale-[0.97] transition-transform"
               style={{ background:'linear-gradient(90deg,#FF2D78,#FF6B35)',boxShadow:'0 4px 22px rgba(255,45,120,0.5)' }}>
-              <span>📲</span><span>Share My Bingo</span>
+              <span>📲</span><span>{tr('Share My Bingo')}</span>
             </button>
             <button onClick={onClose}
               className="w-full py-3 rounded-2xl font-bold text-white/70 text-sm border active:scale-[0.97] transition-transform"
@@ -947,7 +948,7 @@ function ShareDrawer({ photos, completedCount, isVIP, onClose, onExportHD }: {
         style={{ maxWidth:480,background:'linear-gradient(160deg,#12043A,#2D1B69)',border:'1.5px solid rgba(255,255,255,0.1)',borderBottom:'none',boxShadow:'0 -8px 60px rgba(139,92,246,0.4)' }}>
         <div className="flex justify-center pt-3 pb-1"><div className="w-10 h-1 rounded-full bg-white/20"/></div>
         <div className="px-5 pb-10 pt-2">
-          <h3 className="text-[20px] font-black text-white text-center mb-0.5" style={{ fontFamily:'Pacifico,cursive' }}>Share My Bingo 📲</h3>
+          <h3 className="text-[20px] font-black text-white text-center mb-0.5" style={{ fontFamily:'Pacifico,cursive' }}>{tr('Share My Bingo 📲')}</h3>
           <p className="text-pink-300/75 text-center text-xs mb-4 font-semibold">{completedCount} / 24 completed · screenshot to share visuals</p>
           {/* Mini card */}
           <div className="rounded-2xl overflow-hidden p-3 mb-5" style={{ background:'linear-gradient(135deg,#7C3AED,#DB2777,#EA580C)' }}>
@@ -959,7 +960,7 @@ function ShareDrawer({ photos, completedCount, isVIP, onClose, onExportHD }: {
                   <div key={sq.id} className="aspect-square rounded-md overflow-hidden flex items-center justify-center"
                     style={{ background:`linear-gradient(135deg,${c1},${c2})` }}>
                     {photos[sq.id]?<img src={photos[sq.id]} alt="" className="w-full h-full object-cover"/>
-                      :sq.isCenter?<span className="text-[6px] text-yellow-300 font-black">FREE</span>
+                      :sq.isCenter?<span className="text-[6px] text-yellow-300 font-black">{tr('FREE')}</span>
                       :<span className="text-[11px] leading-none">{sq.emoji}</span>}
                   </div>
                 )
@@ -970,16 +971,16 @@ function ShareDrawer({ photos, completedCount, isVIP, onClose, onExportHD }: {
           {/* Share buttons */}
           <div className="grid grid-cols-3 gap-2.5 mb-3">
             {[
-              {label:'Text\nMessage',emoji:'💬',bg:'linear-gradient(135deg,#34D399,#059669)',fn:handleSMS},
-              {label:'Send\nEmail',  emoji:'✉️',bg:'linear-gradient(135deg,#60A5FA,#2563EB)',fn:handleEmail},
-              {label:copied?'Copied!':'Copy\nLink',emoji:copied?'✅':'🔗',
+              {label: 'Text\nMessage',emoji:'💬',bg:'linear-gradient(135deg,#34D399,#059669)',fn:handleSMS},
+              {label: 'Send\nEmail',  emoji:'✉️',bg:'linear-gradient(135deg,#60A5FA,#2563EB)',fn:handleEmail},
+              {label:copied?tr('Copied!'):tr('Copy\nLink'),emoji:copied?'✅':'🔗',
                bg:copied?'linear-gradient(135deg,#4ADE80,#16A34A)':'linear-gradient(135deg,#F472B6,#DB2777)',fn:handleCopy},
             ].map((b,i)=>(
               <button key={i} onClick={b.fn}
                 className="flex flex-col items-center gap-2 py-4 rounded-2xl active:scale-95 transition-transform"
                 style={{ background:'rgba(255,255,255,0.08)',border:'1px solid rgba(255,255,255,0.1)' }}>
                 <div className="w-10 h-10 rounded-xl flex items-center justify-center text-xl" style={{ background:b.bg }}>{b.emoji}</div>
-                <span className="text-white font-bold text-[11px] leading-tight text-center whitespace-pre">{b.label}</span>
+                <span className="text-white font-bold text-[11px] leading-tight text-center whitespace-pre">{tr(b.label)}</span>
               </button>
             ))}
           </div>
@@ -988,7 +989,7 @@ function ShareDrawer({ photos, completedCount, isVIP, onClose, onExportHD }: {
             <button onClick={()=>{onClose();onExportHD()}}
               className="w-full py-3.5 rounded-2xl font-black text-[#1a0533] flex items-center justify-center gap-2 mb-3 active:scale-[0.97] transition-transform"
               style={{ background:'linear-gradient(90deg,#FFD60A,#FF6B35)',boxShadow:'0 3px 16px rgba(255,180,0,0.35)' }}>
-              <span>🖼️</span><span>Download HD Card (VIP)</span>
+              <span>🖼️</span><span>{tr('Download HD Card (VIP)')}</span>
             </button>
           )}
           <button onClick={onClose}
@@ -1080,7 +1081,7 @@ function ShareLinkDrawer({ customLabels, onClose }: {
           {/* Link box */}
           <div className="mt-4 mb-4 rounded-2xl px-4 py-3"
             style={{ background:'rgba(212,175,55,0.06)',border:'1.5px solid rgba(212,175,55,0.28)' }}>
-            <p className="text-[9px] font-black uppercase tracking-widest mb-1.5" style={{ color:'rgba(212,175,55,0.5)' }}>Your unique board link</p>
+            <p className="text-[9px] font-black uppercase tracking-widest mb-1.5" style={{ color:'rgba(212,175,55,0.5)' }}>{tr('Your unique board link')}</p>
             <p className="text-[11px] font-mono break-all leading-relaxed" style={{ color:'rgba(212,175,55,0.7)' }}>
               {link.length > 80 ? link.slice(0,77)+'…' : link}
             </p>
@@ -1109,18 +1110,18 @@ function ShareLinkDrawer({ customLabels, onClose }: {
                 ? { background:'linear-gradient(90deg,#4ADE80,#059669)',color:'white',boxShadow:'0 4px 20px rgba(74,222,128,0.4)' }
                 : { background:'linear-gradient(90deg,#C9A84C,#FFE08A)',color:'#06050F',boxShadow:'0 4px 20px rgba(212,175,55,0.4)' }}>
               <span>{copied?'✅':'🔗'}</span>
-              <span>{copied?'Link Copied!':'Copy Player Link'}</span>
+              <span>{copied?tr('Link Copied!'):tr('Copy Player Link')}</span>
             </button>
             <div className="grid grid-cols-2 gap-2.5">
               <button onClick={shareViaSMS}
                 className="py-3.5 rounded-2xl font-bold text-white text-sm flex items-center justify-center gap-2 active:scale-95 transition-transform"
                 style={{ background:'rgba(212,175,55,0.1)',border:'1px solid rgba(212,175,55,0.25)' }}>
-                <span>💬</span><span>Text Players</span>
+                <span>💬</span><span>{tr('Text Players')}</span>
               </button>
               <button onClick={shareViaEmail}
                 className="py-3.5 rounded-2xl font-bold text-white text-sm flex items-center justify-center gap-2 active:scale-95 transition-transform"
                 style={{ background:'rgba(212,175,55,0.1)',border:'1px solid rgba(212,175,55,0.25)' }}>
-                <span>✉️</span><span>Email Players</span>
+                <span>✉️</span><span>{tr('Email Players')}</span>
               </button>
             </div>
             <button onClick={onClose}
@@ -1171,7 +1172,7 @@ function BingoTile({ square, photo, completed, isWinning, springKey, isEditing, 
       style={{ background:isCenter?'linear-gradient(135deg,#7C3AED,#DB2777,#EA580C)':`linear-gradient(135deg,${c1},${c2})`,
                border,boxShadow:isCenter?'0 0 28px rgba(219,39,119,0.6)':isWinning?undefined:completed?`0 2px 14px ${c1}55`:'0 2px 8px rgba(0,0,0,0.38)' }}>
       {photo&&<>
-        <img src={photo} alt={displayLabel} className="absolute inset-0 w-full h-full object-cover" draggable={false}/>
+        <img src={photo} alt={tr(displayLabel)} className="absolute inset-0 w-full h-full object-cover" draggable={false}/>
         <div className="absolute inset-0" style={{ background:'linear-gradient(to top,rgba(0,0,0,0.72) 0%,rgba(0,0,0,0.08) 50%,transparent 100%)' }}/>
         {!isEditing&&<div className="absolute top-1 right-1 w-5 h-5 rounded-full flex items-center justify-center"
           style={{ background:'rgba(0,0,0,0.5)',backdropFilter:'blur(4px)',border:'0.5px solid rgba(255,255,255,0.2)' }}>
@@ -1198,20 +1199,20 @@ function BingoTile({ square, photo, completed, isWinning, springKey, isEditing, 
       </div>}
       {isCenter?(
         <div className="relative z-10 flex flex-col items-center gap-0.5 px-1">
-          {photo?<><div className="text-[13px]">✅</div><span className="text-[7px] font-black text-yellow-300 leading-tight">DONE</span></>
-            :<><span className="text-[18px] cam-breathe">📸</span><span className="text-[7px] font-black text-yellow-300 leading-tight text-center">SELFIE</span><span className="text-[5.5px] font-bold text-white/80 text-center leading-tight">same initial</span></>}
+          {photo?<><div className="text-[13px]">✅</div><span className="text-[7px] font-black text-yellow-300 leading-tight">{tr('DONE')}</span></>
+            :<><span className="text-[18px] cam-breathe">📸</span><span className="text-[7px] font-black text-yellow-300 leading-tight text-center">{tr('SELFIE')}</span><span className="text-[5.5px] font-bold text-white/80 text-center leading-tight">same initial</span></>}
           <div className="absolute -top-px -left-px">
-            <span className="text-[5.5px] font-black text-yellow-300 px-1 py-[2px] rounded-tl-xl rounded-br-md" style={{ background:'rgba(0,0,0,0.35)' }}>FREE</span>
+            <span className="text-[5.5px] font-black text-yellow-300 px-1 py-[2px] rounded-tl-xl rounded-br-md" style={{ background:'rgba(0,0,0,0.35)' }}>{tr('FREE')}</span>
           </div>
         </div>
       ):photo?(
         <div className="absolute bottom-0.5 left-0 right-0 z-10 flex justify-center px-0.5">
-          <span className="text-[6px] font-bold text-white/90 text-center leading-tight line-clamp-2">{displayLabel}</span>
+          <span className="text-[6px] font-bold text-white/90 text-center leading-tight line-clamp-2">{tr(displayLabel)}</span>
         </div>
       ):(
         <div className="flex flex-col items-center gap-[2px] px-0.5">
           <span className="text-[13px] leading-none">{displayEmoji}</span>
-          <span className="text-[6.5px] font-bold text-white/95 text-center leading-tight">{displayLabel}</span>
+          <span className="text-[6.5px] font-bold text-white/95 text-center leading-tight">{tr(displayLabel)}</span>
           <div className="mt-[2px] cam-breathe opacity-55">
             <svg viewBox="0 0 24 24" width="8" height="8" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
               <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/>
@@ -1228,6 +1229,7 @@ function BingoTile({ square, photo, completed, isWinning, springKey, isEditing, 
 // ─── Main App ─────────────────────────────────────────────────────────────────
 
 export default function App() {
+  useLang()
   // Metadata from localStorage (synchronous)
   const [completed,     setCompleted]     = useState<Set<number>>(()=>loadMeta().completed)
   const [photoTimes,    setPhotoTimes]    = useState<Record<number,Date>>(()=>loadMeta().photoTimes)
@@ -1430,7 +1432,8 @@ export default function App() {
       {/* ── Header ── */}
       <div className="w-full pt-7 pb-3 px-4">
         {/* Top row: audio + tier badge */}
-        <div className="flex items-center justify-between mb-1">
+        <div className="relative flex items-center justify-between mb-1">
+          <LangToggle className="absolute left-1/2 -translate-x-1/2"/>
           {/* Audio toggle */}
           <button
             onClick={()=>setAudioEnabled(v=>!v)}
@@ -1438,7 +1441,7 @@ export default function App() {
             style={isVIP
               ? { background:'rgba(212,175,55,0.12)',border:'1px solid rgba(212,175,55,0.3)',backdropFilter:'blur(8px)' }
               : { background:'rgba(255,255,255,0.1)',border:'1px solid rgba(255,255,255,0.15)',backdropFilter:'blur(8px)' }}
-            title={audioEnabled?'Mute ambient':'Play ambient music'}
+            title={audioEnabled?tr('Mute ambient'):tr('Play ambient music')}
           >
             {audioEnabled ? (
               <svg viewBox="0 0 24 24" width="16" height="16" fill="none"
@@ -1475,7 +1478,7 @@ export default function App() {
               className="flex items-center gap-1 px-2.5 py-1.5 rounded-full font-black text-[11px] active:scale-90 transition-transform"
               style={{ background:'linear-gradient(90deg,#FF2D78,#8B5CF6)',color:'white',
                        boxShadow:'0 2px 12px rgba(255,45,120,0.45)' }}>
-              <span>✨</span><span>Go VIP</span>
+              <span>✨</span><span>{tr('Go VIP')}</span>
             </button>
           )}
         </div>
@@ -1506,7 +1509,7 @@ export default function App() {
         {/* Subtitle — tier-aware */}
         <div className="flex items-center justify-center gap-2 mb-1">
           <p className="text-[13px] font-semibold tracking-wide text-center" style={{ color:subtitleColor }}>
-            {isVIP ? 'Your exclusive VIP board — customize & collect ✦' : 'How many can you check off?'}
+            {isVIP ? tr('Your exclusive VIP board — customize & collect ✦') : tr('How many can you check off?')}
           </p>
         </div>
 
@@ -1563,8 +1566,8 @@ export default function App() {
                      border:'1px solid rgba(139,92,246,0.35)' }}>
             <span className="text-lg flex-shrink-0">🔗</span>
             <div>
-              <p className="text-white font-black text-[12px] leading-tight">Playing a custom board</p>
-              <p className="text-white/50 text-[10px] leading-tight">Shared with you by a VIP member · Play and check off your own progress</p>
+              <p className="text-white font-black text-[12px] leading-tight">{tr('Playing a custom board')}</p>
+              <p className="text-white/50 text-[10px] leading-tight">{tr('Shared with you by a VIP member · Play and check off your own progress')}</p>
             </div>
           </div>
         </div>
@@ -1603,11 +1606,11 @@ export default function App() {
               : { background:'linear-gradient(90deg,rgba(139,92,246,0.3),rgba(219,39,119,0.3))',border:'1px solid rgba(139,92,246,0.4)' }}>
             <span className="text-base">✏️</span>
             <p className="font-bold text-xs flex-1" style={{ color:isVIP?'rgba(212,175,55,0.9)':'white' }}>
-              {isVIP?'VIP Edit Mode — tap any square to customize':'Edit mode on — tap any square to customize it'}
+              {isVIP?tr('VIP Edit Mode — tap any square to customize'):tr('Edit mode on — tap any square to customize it')}
             </p>
             <button onClick={()=>setIsEditing(false)}
               className="text-[10px] font-black active:scale-95 transition-transform"
-              style={{ color:isVIP?'rgba(212,175,55,0.6)':'rgba(255,255,255,0.7)' }}>Done</button>
+              style={{ color:isVIP?'rgba(212,175,55,0.6)':'rgba(255,255,255,0.7)' }}>{tr('Done')}</button>
           </div>
         </div>
       )}
@@ -1670,7 +1673,7 @@ export default function App() {
             onClick={()=>window.open('https://buy.stripe.com/6oUbJ1dDq3LBcJP5AT0Ba01','_blank','noopener,noreferrer')}
             className="w-full py-4 rounded-2xl font-black text-white text-[15px] flex items-center justify-center gap-2 active:scale-[0.97] transition-transform"
             style={{ background:'linear-gradient(90deg,#8B5CF6,#DB2777)',boxShadow:'0 4px 22px rgba(139,92,246,0.4)' }}>
-            <span>✨</span><span>Unlock VIP & Customize Your Board — $2.99</span>
+            <span>✨</span><span>{tr('Unlock VIP & Customize Your Board — $2.99')}</span>
           </button>
         )}
         {isVIP&&(
@@ -1682,14 +1685,14 @@ export default function App() {
               : { background:'linear-gradient(135deg,#1A1628,#0D0B18)',color:'#D4AF37',
                   border:'1px solid rgba(212,175,55,0.4)',boxShadow:'0 4px 22px rgba(212,175,55,0.2)' }}>
             <span>{isEditing?'✅':'✏️'}</span>
-            <span>{isEditing?'Done Editing Board':'✦ Edit Board Squares'}</span>
+            <span>{isEditing?tr('Done Editing Board'):'✦ Edit Board Squares'}</span>
           </button>
         )}
         {isVIP&&!isEditing&&(
           <button onClick={()=>setShowShareLink(true)}
             className="w-full py-3.5 rounded-2xl font-black text-[#06050F] text-[15px] flex items-center justify-center gap-2 active:scale-[0.97] transition-transform"
             style={{ background:'linear-gradient(90deg,#C9A84C,#FFE08A)',boxShadow:'0 4px 22px rgba(212,175,55,0.35)' }}>
-            <span>🔗</span><span>Generate Player Link</span>
+            <span>🔗</span><span>{tr('Generate Player Link')}</span>
           </button>
         )}
         {bingoLines.length > 0 && (
@@ -1699,7 +1702,7 @@ export default function App() {
               ? { background:'linear-gradient(90deg,#8B6914,#C9A84C)',color:'#06050F',boxShadow:'0 4px 22px rgba(212,175,55,0.35)' }
               : { background:'linear-gradient(90deg,#FF2D78,#FF6B35)',color:'white',boxShadow:'0 4px 26px rgba(255,45,120,0.48)' }}>
             <span>🎉</span>
-            <span>Share My Bingo</span>
+            <span>{tr('Share My Bingo')}</span>
           </button>
         )}
         <button onClick={handleReset}
@@ -1743,13 +1746,13 @@ export default function App() {
           {toast==='welcome'&&(
             <div className="toast-in flex items-center gap-2 px-4 py-2.5 rounded-full font-bold text-sm text-white whitespace-nowrap"
               style={{ background:'linear-gradient(90deg,#7C3AED,#DB2777)',boxShadow:'0 4px 20px rgba(139,92,246,0.5)' }}>
-              <span>🇲🇽</span><span>Progress restored! Pick up where you left off.</span><span>✨</span>
+              <span>🇲🇽</span><span>{tr('Progress restored! Pick up where you left off.')}</span><span>✨</span>
             </div>
           )}
           {toast==='reset'&&(
             <div className="toast-in flex items-center gap-2 px-4 py-2.5 rounded-full font-bold text-sm text-white whitespace-nowrap"
               style={{ background:'linear-gradient(90deg,#14B8A6,#0E7490)',boxShadow:'0 4px 20px rgba(20,184,166,0.5)' }}>
-              <span>🔄</span><span>Card reset. Fresh adventure awaits!</span><span>🌮</span>
+              <span>🔄</span><span>{tr('Card reset. Fresh adventure awaits!')}</span><span>🌮</span>
             </div>
           )}
           {toast==='vip'&&(

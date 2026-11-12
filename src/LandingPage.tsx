@@ -1,5 +1,6 @@
 import { useState, type CSSProperties } from 'react'
 import { saveLead } from './supabaseClient'
+import { tr, useLang, LangToggle } from './i18n'
 
 const NAVY    = '#050B1F'
 const PINK    = '#FF2D7B'
@@ -66,6 +67,7 @@ const HERO = [
 ]
 
 export default function LandingPage({ onEnter }: { onEnter: ()=>void }) {
+  useLang()
   const [contact, setContact] = useState('')
   const [loading, setLoading]   = useState(false)
   const [touched, setTouched]   = useState(false)
@@ -81,11 +83,11 @@ export default function LandingPage({ onEnter }: { onEnter: ()=>void }) {
     setSaveError(null)
 
     if (!value) {
-      setFieldError('Please enter your email address to continue.')
+      setFieldError(tr('Please enter your email address to continue.'))
       return
     }
     if (!valid) {
-      setFieldError('Please enter a valid email address.')
+      setFieldError(tr('Please enter a valid email address.'))
       return
     }
     setFieldError(null)
@@ -110,6 +112,7 @@ export default function LandingPage({ onEnter }: { onEnter: ()=>void }) {
   return (
     <div className="relative min-h-screen w-full overflow-hidden flex flex-col items-center justify-center"
       style={{ background:`radial-gradient(ellipse 130% 80% at 50% -8%,#091440 0%,${NAVY} 55%,#020810 100%)` }}>
+      <LangToggle className="fixed top-4 right-4 z-50"/>
 
       {/* ── Floating BINGO balls ── */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden" style={{ filter:'blur(1.5px)', opacity:0.7 }}>
@@ -217,11 +220,11 @@ export default function LandingPage({ onEnter }: { onEnter: ()=>void }) {
                 style={{ fontFamily:"'Barlow Condensed',sans-serif",
                          fontSize:'clamp(28px,5.5vw,40px)', letterSpacing:'0.02em',
                          textShadow:`0 0 40px ${PINK}55` }}>
-                Ready to Play?
+                {tr('Ready to Play?')}
               </h1>
               <p className="font-semibold leading-relaxed mb-6"
                 style={{ fontSize:14, color:'rgba(255,255,255,0.50)', fontFamily:"'Nunito',sans-serif" }}>
-                Enter your email address to instantly unlock your free digital bingo board.
+                {tr('Enter your email address to instantly unlock your free digital bingo board.')}
               </p>
 
               {/* Form */}
@@ -236,7 +239,7 @@ export default function LandingPage({ onEnter }: { onEnter: ()=>void }) {
                       setSaveError(null)
                       setTouched(false)
                     }}
-                    placeholder="Email Address"
+                    placeholder={tr('Email Address')}
                     autoComplete="email"
                     type="email"
                     disabled={loading}
@@ -285,9 +288,9 @@ export default function LandingPage({ onEnter }: { onEnter: ()=>void }) {
                         <circle cx="12" cy="12" r="10" strokeOpacity="0.3"/>
                         <path d="M12 2a10 10 0 0 1 10 10"/>
                       </svg>
-                      SAVING…
+                      {tr('SAVING…')}
                     </span>
-                  ) : 'PLAY NOW'}
+                  ) : tr('PLAY NOW')}
                 </button>
 
                 {/* Save / network error */}
