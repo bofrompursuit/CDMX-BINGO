@@ -5,13 +5,13 @@
     "index": false
   },
   "icons": {
-    "icon": "/favicon.png"
+    "icon": "/favicon.ico"
   },
   "accessibility": {
     "addBypassLinks": false,
     "ignoreReducedMotion": false
   },
   "customScripts": {
-    "headEnd": "<link rel=\"manifest\" href=\"/manifest.webmanifest\"><link rel=\"apple-touch-icon\" href=\"/apple-touch-icon.png\"><meta name=\"apple-mobile-web-app-capable\" content=\"yes\"><meta name=\"apple-mobile-web-app-status-bar-style\" content=\"black-translucent\"><meta name=\"apple-mobile-web-app-title\" content=\"CDMX Bingo\"><meta name=\"theme-color\" content=\"#006BB6\">"
+    "headEnd": "<link rel=\"icon\" href=\"/icon.png\" type=\"image/png\" sizes=\"1024x1024\"><link rel=\"apple-touch-icon\" href=\"/apple-touch-icon.png\" sizes=\"180x180\"><link rel=\"manifest\" href=\"/manifest.webmanifest\"><meta name=\"apple-mobile-web-app-capable\" content=\"yes\"><meta name=\"mobile-web-app-capable\" content=\"yes\"><meta name=\"apple-mobile-web-app-status-bar-style\" content=\"black-translucent\"><meta name=\"apple-mobile-web-app-title\" content=\"CDMX Bingo\"><meta name=\"theme-color\" content=\"#000000\">"
   }
 }
